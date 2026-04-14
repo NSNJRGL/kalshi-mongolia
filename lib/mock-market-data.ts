@@ -73,6 +73,11 @@ type TopicItemRaw = {
   trendDirection: TrendDirection
 }
 
+type LinkItemRaw = {
+  label: LocalizedText
+  href?: string
+}
+
 const brandName: LocalizedText = {
   en: "MarketKhul",
   mn: "МаркетХөл",
@@ -98,7 +103,7 @@ const categoryLabels: Record<CategoryKey, LocalizedText> = {
 
 const primaryNavigationRaw: ReadonlyArray<{
   label: LocalizedText
-  href: string
+  href?: string
   count?: number
 }> = [
   {
@@ -107,16 +112,13 @@ const primaryNavigationRaw: ReadonlyArray<{
   },
   {
     label: { en: "LIVE", mn: "ШУУД" },
-    href: "#live",
     count: 41,
   },
   {
     label: { en: "COMMUNITY", mn: "НИЙГЭМ" },
-    href: "#community",
   },
   {
     label: { en: "RESEARCH", mn: "СУДАЛГАА" },
-    href: "#research",
   },
 ]
 
@@ -393,52 +395,55 @@ const hotTopicsRaw: TopicItemRaw[] = [
   },
 ]
 
-const footerColumnsRaw = [
+const footerColumnsRaw: ReadonlyArray<{
+  title: LocalizedText
+  items: readonly LinkItemRaw[]
+}> = [
   {
     title: { en: "Company", mn: "Компани" },
     items: [
-      { en: "About us", mn: "Бидний тухай" },
-      { en: "Careers", mn: "Ажлын байр" },
-      { en: "Contact", mn: "Холбоо барих" },
-      { en: "Partners", mn: "Хамтрагчид" },
+      { label: { en: "About us", mn: "Бидний тухай" } },
+      { label: { en: "Careers", mn: "Ажлын байр" } },
+      { label: { en: "Contact", mn: "Холбоо барих" } },
+      { label: { en: "Partners", mn: "Хамтрагчид" } },
     ],
   },
   {
     title: { en: "Markets", mn: "Зах зээлүүд" },
     items: [
-      categoryLabels.sports,
-      categoryLabels.economy,
-      categoryLabels.crypto,
-      categoryLabels.politics,
-      categoryLabels.weather,
+      { label: categoryLabels.sports },
+      { label: categoryLabels.economy },
+      { label: categoryLabels.crypto },
+      { label: categoryLabels.politics },
+      { label: categoryLabels.weather },
     ],
   },
   {
     title: { en: "Resources", mn: "Нөөцүүд" },
     items: [
-      { en: "How it works", mn: "Хэрхэн ажилладаг" },
-      { en: "FAQ", mn: "Түгээмэл асуулт" },
-      { en: "Learning", mn: "Сургалт" },
-      { en: "API docs", mn: "API баримт бичиг" },
-      { en: "Blog", mn: "Блог" },
+      { label: { en: "How it works", mn: "Хэрхэн ажилладаг" } },
+      { label: { en: "FAQ", mn: "Түгээмэл асуулт" } },
+      { label: { en: "Learning", mn: "Сургалт" } },
+      { label: { en: "API docs", mn: "API баримт бичиг" } },
+      { label: { en: "Blog", mn: "Блог" } },
     ],
   },
   {
     title: { en: "Legal", mn: "Хууль эрх зүй" },
     items: [
-      { en: "Terms of service", mn: "Үйлчилгээний нөхцөл" },
-      { en: "Privacy policy", mn: "Нууцлалын бодлого" },
-      { en: "Cookie policy", mn: "Cookie бодлого" },
-      { en: "Risk disclaimer", mn: "Хариуцлагын татгалзал" },
+      { label: { en: "Terms of service", mn: "Үйлчилгээний нөхцөл" } },
+      { label: { en: "Privacy policy", mn: "Нууцлалын бодлого" } },
+      { label: { en: "Cookie policy", mn: "Cookie бодлого" } },
+      { label: { en: "Risk disclaimer", mn: "Хариуцлагын татгалзал" } },
     ],
   },
 ] as const
 
-const socialLinksRaw = [
-  { en: "Twitter", mn: "Twitter" },
-  { en: "Telegram", mn: "Telegram" },
-  { en: "GitHub", mn: "GitHub" },
-  { en: "Discord", mn: "Discord" },
+const socialLinksRaw: readonly LinkItemRaw[] = [
+  { label: { en: "Twitter", mn: "Twitter" } },
+  { label: { en: "Telegram", mn: "Telegram" } },
+  { label: { en: "GitHub", mn: "GitHub" } },
+  { label: { en: "Discord", mn: "Discord" } },
 ] as const
 
 export function getHomepageContent(language: Language) {
@@ -512,10 +517,13 @@ export function getHomepageContent(language: Language) {
       allMarkets: language === "en" ? "All Markets" : "Бүх зах зээлүүд",
       marketSearchPlaceholder:
         language === "en" ? "Search markets..." : "Зах зээл хайх...",
+      marketSearchLabel:
+        language === "en" ? "Search all markets" : "Бүх зах зээлээс хайх",
       matchingMarkets:
         language === "en" ? "markets found" : "зах зээл олдлоо",
       yes: language === "en" ? "Yes" : "Тийм",
       no: language === "en" ? "No" : "Үгүй",
+      live: language === "en" ? "LIVE" : "ШУУД",
       loadMore: language === "en" ? "Load more" : "Цааш ачаалах",
       noMarketsTitle:
         language === "en" ? "No matching markets found" : "Тохирох зах зээл олдсонгүй",
@@ -524,6 +532,12 @@ export function getHomepageContent(language: Language) {
           ? "Try a different search term or clear the active filters."
           : "Өөр хайлтын үг ашиглах эсвэл шүүлтүүрээ цэвэрлээд дахин оролдоно уу.",
       clearFilters: language === "en" ? "Clear filters" : "Шүүлтүүр цэвэрлэх",
+      resetMarketFilters:
+        language === "en" ? "Reset market filters" : "Зах зээлийн шүүлтүүрийг цэвэрлэх",
+      marketTicker: language === "en" ? "MKT" : "ЗАХ",
+      spreadAndTotal:
+        language === "en" ? "Spread and Total" : "Спрэд ба нийт",
+      twoMarkets: language === "en" ? "2 markets" : "2 зах зээл",
       community: language === "en" ? "Community" : "Нийгэмлэг",
       newsletter: language === "en" ? "Get updates" : "Мэдээлэл авах",
       newsletterDescription:
@@ -545,8 +559,14 @@ export function getHomepageContent(language: Language) {
     },
     footerColumns: footerColumnsRaw.map((column) => ({
       title: column.title[language],
-      items: column.items.map((item) => item[language]),
+      items: column.items.map((item) => ({
+        label: item.label[language],
+        href: item.href,
+      })),
     })),
-    socialLinks: socialLinksRaw.map((item) => item[language]),
+    socialLinks: socialLinksRaw.map((item) => ({
+      label: item.label[language],
+      href: item.href,
+    })),
   }
 }

@@ -35,21 +35,37 @@ export function Header() {
 
           <nav className="hidden items-center gap-3 lg:flex">
             {content.primaryNavigation.map((item, index) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={cn(
-                  "flex items-center gap-1 text-[13px] tracking-[-0.01em] transition-colors",
-                  index === 0 ? "font-semibold text-[#ececec]" : "text-[#8a8a8a] hover:text-[#ececec]"
-                )}
-              >
-                <span>{item.label}</span>
-                {item.count ? (
-                  <Badge className="h-4 rounded-full bg-[#ef4444] px-[6px] text-[10px] font-medium text-white hover:bg-[#ef4444]">
-                    {item.count}
-                  </Badge>
-                ) : null}
-              </Link>
+              item.href ? (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-1 text-[13px] tracking-[-0.01em] transition-colors",
+                    index === 0
+                      ? "font-semibold text-[#ececec]"
+                      : "text-[#8a8a8a] hover:text-[#ececec]"
+                  )}
+                >
+                  <span>{item.label}</span>
+                  {item.count ? (
+                    <Badge className="h-4 rounded-full bg-[#ef4444] px-[6px] text-[10px] font-medium text-white hover:bg-[#ef4444]">
+                      {item.count}
+                    </Badge>
+                  ) : null}
+                </Link>
+              ) : (
+                <span
+                  key={item.label}
+                  className="flex cursor-default items-center gap-1 text-[13px] tracking-[-0.01em] text-[#5f5f68]"
+                >
+                  <span>{item.label}</span>
+                  {item.count ? (
+                    <Badge className="h-4 rounded-full bg-[#ef4444] px-[6px] text-[10px] font-medium text-white hover:bg-[#ef4444]">
+                      {item.count}
+                    </Badge>
+                  ) : null}
+                </span>
+              )
             ))}
           </nav>
         </div>
@@ -95,16 +111,15 @@ export function Header() {
 
       <div className="flex h-[33px] items-center gap-4 overflow-x-auto border-t border-white/10 text-[12px]">
         {content.categoryNavigation.map((item) => (
-          <Link
+          <span
             key={item}
-            href="#"
             className={cn(
-              "shrink-0 font-medium text-[#8a8a8a] transition-colors hover:text-[#ececec]",
+              "shrink-0 cursor-default font-medium text-[#8a8a8a]",
               item === content.activeCategoryNavigation && "text-[#10b981]"
             )}
           >
             {item}
-          </Link>
+          </span>
         ))}
       </div>
     </header>

@@ -34,6 +34,7 @@ export function HomepageShell() {
           key={content.language}
           title={content.labels.allMarkets}
           searchPlaceholder={content.labels.marketSearchPlaceholder}
+          searchLabel={content.labels.marketSearchLabel}
           filters={content.marketFilters}
           allFilterLabel={content.allFilterLabel}
           matchingMarketsLabel={content.labels.matchingMarkets}
@@ -43,6 +44,11 @@ export function HomepageShell() {
           noMarketsTitle={content.labels.noMarketsTitle}
           noMarketsDescription={content.labels.noMarketsDescription}
           clearFiltersLabel={content.labels.clearFilters}
+          resetFiltersLabel={content.labels.resetMarketFilters}
+          marketTickerLabel={content.labels.marketTicker}
+          liveLabel={content.labels.live}
+          spreadAndTotalLabel={content.labels.spreadAndTotal}
+          marketCountLabel={content.labels.twoMarkets}
           items={content.allMarkets}
         />
       </main>

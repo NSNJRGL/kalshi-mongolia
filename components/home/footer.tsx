@@ -6,6 +6,7 @@ import { useLanguage } from "@/components/providers/language-provider"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { getHomepageContent } from "@/lib/mock-market-data"
+import { cn } from "@/lib/utils"
 
 export function Footer() {
   const { language, setLanguage } = useLanguage()
@@ -20,10 +21,14 @@ export function Footer() {
               <h3 className="text-sm font-bold text-[#e5e5e5]">{column.title}</h3>
               <ul className="mt-9 space-y-4">
                 {column.items.map((item) => (
-                  <li key={item} className="text-sm text-[#888]">
-                    <Link href="#" className="transition-colors hover:text-[#e5e5e5]">
-                      {item}
-                    </Link>
+                  <li key={item.label} className="text-sm text-[#888]">
+                    {item.href ? (
+                      <Link href={item.href} className="transition-colors hover:text-[#e5e5e5]">
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <span>{item.label}</span>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -34,13 +39,17 @@ export function Footer() {
             <h3 className="text-sm font-bold text-[#e5e5e5]">{content.labels.community}</h3>
             <ul className="mt-9 space-y-3">
               {content.socialLinks.map((item) => (
-                <li key={item}>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#888] transition-colors hover:text-[#e5e5e5]"
-                  >
-                    {item}
-                  </Link>
+                <li key={item.label} className="text-sm text-[#888]">
+                  {item.href ? (
+                    <Link
+                      href={item.href}
+                      className="transition-colors hover:text-[#e5e5e5]"
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <span>{item.label}</span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -68,7 +77,7 @@ export function Footer() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap items-center gap-4">
               <div className="flex items-center gap-2">
-              <div className="flex size-8 items-center justify-center rounded-lg bg-[#10b981] text-sm font-bold text-[#0a0a0a]">
+                <div className="flex size-8 items-center justify-center rounded-lg bg-[#10b981] text-sm font-bold text-[#0a0a0a]">
                   М
                 </div>
                 <span className="text-[18px] font-bold tracking-[-0.02em] text-[#e5e5e5]">
@@ -81,17 +90,23 @@ export function Footer() {
             <div className="flex gap-4">
               <Button
                 variant="ghost"
+                aria-pressed={language === "mn"}
                 onClick={() => setLanguage("mn")}
-                className="h-8 rounded-lg px-3 text-sm text-[#e5e5e5] hover:bg-[#111111]"
+                className={cn(
+                  "h-8 rounded-lg px-3 text-sm text-[#e5e5e5] hover:bg-[#111111]",
+                  language === "mn" && "bg-[#111111]"
+                )}
               >
                 🇲🇳 {content.labels.mongolian}
               </Button>
               <Button
                 variant="ghost"
+                aria-pressed={language === "en"}
                 onClick={() => setLanguage("en")}
-                className={`h-8 rounded-lg px-3 text-sm text-[#e5e5e5] hover:bg-[#111111] ${
-                  language === "en" ? "bg-[#111111]" : ""
-                }`}
+                className={cn(
+                  "h-8 rounded-lg px-3 text-sm text-[#e5e5e5] hover:bg-[#111111]",
+                  language === "en" && "bg-[#111111]"
+                )}
               >
                 🇺🇸 {content.labels.english}
               </Button>

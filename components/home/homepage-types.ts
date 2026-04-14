@@ -15,6 +15,7 @@ export type FeaturedHeroProps = {
 export type MarketGridProps = {
   title: string
   searchPlaceholder: string
+  searchLabel: string
   filters: readonly string[]
   allFilterLabel: string
   matchingMarketsLabel: string
@@ -24,6 +25,11 @@ export type MarketGridProps = {
   noMarketsTitle: string
   noMarketsDescription: string
   clearFiltersLabel: string
+  resetFiltersLabel: string
+  marketTickerLabel: string
+  liveLabel: string
+  spreadAndTotalLabel: string
+  marketCountLabel: string
   items: AllMarketItem[]
 }
 

@@ -9,6 +9,10 @@ import {
   useState,
 } from "react"
 
+import {
+  LANGUAGE_COOKIE_KEY,
+  LANGUAGE_STORAGE_KEY,
+} from "@/lib/language"
 import type { Language } from "@/lib/mock-market-data"
 
 type LanguageContextValue = {
@@ -18,20 +22,20 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null)
 
-const STORAGE_KEY = "ulaan-market-language"
+type LanguageProviderProps = {
+  children: ReactNode
+  initialLanguage: Language
+}
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>(() => {
-    if (typeof window === "undefined") {
-      return "en"
-    }
-
-    const storedLanguage = window.localStorage.getItem(STORAGE_KEY) as Language | null
-    return storedLanguage === "mn" || storedLanguage === "en" ? storedLanguage : "en"
-  })
+export function LanguageProvider({
+  children,
+  initialLanguage,
+}: LanguageProviderProps) {
+  const [language, setLanguage] = useState<Language>(initialLanguage)
 
   useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, language)
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language)
+    document.cookie = `${LANGUAGE_COOKIE_KEY}=${language}; path=/; max-age=31536000; samesite=lax`
     document.documentElement.lang = language
   }, [language])
 

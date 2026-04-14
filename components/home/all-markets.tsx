@@ -21,6 +21,7 @@ export function AllMarkets({
   items,
   title,
   searchPlaceholder,
+  searchLabel,
   filters,
   allFilterLabel,
   matchingMarketsLabel,
@@ -30,6 +31,11 @@ export function AllMarkets({
   noMarketsTitle,
   noMarketsDescription,
   clearFiltersLabel,
+  resetFiltersLabel,
+  marketTickerLabel,
+  liveLabel,
+  spreadAndTotalLabel,
+  marketCountLabel,
 }: MarketGridProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedFilter, setSelectedFilter] = useState(allFilterLabel)
@@ -91,6 +97,7 @@ export function AllMarkets({
                 value={searchQuery}
                 onChange={(event) => handleSearchChange(event.target.value)}
                 placeholder={searchPlaceholder}
+                aria-label={searchLabel}
                 className="h-10 rounded-[10px] border-white/10 bg-[#111111] pl-10 pr-3 text-[13px] text-[#ececec] placeholder:text-[#767676] focus-visible:border-[#10b981]/60 focus-visible:ring-0"
               />
             </div>
@@ -99,7 +106,7 @@ export function AllMarkets({
               size="icon"
               className="size-10 rounded-[10px] border-white/10 bg-[#111111] text-[#8a8a8a] hover:bg-[#181818] hover:text-[#ececec]"
               onClick={resetFilters}
-              aria-label="Reset market filters"
+              aria-label={resetFiltersLabel}
             >
               <HugeiconsIcon icon={SlidersHorizontalIcon} size={16} />
             </Button>
@@ -141,6 +148,10 @@ export function AllMarkets({
                   item={item}
                   yesLabel={yesLabel}
                   noLabel={noLabel}
+                  marketTickerLabel={marketTickerLabel}
+                  liveLabel={liveLabel}
+                  spreadAndTotalLabel={spreadAndTotalLabel}
+                  marketCountLabel={marketCountLabel}
                 />
               ))}
             </div>
@@ -185,10 +196,18 @@ function MarketCard({
   item,
   yesLabel,
   noLabel,
+  marketTickerLabel,
+  liveLabel,
+  spreadAndTotalLabel,
+  marketCountLabel,
 }: {
   item: AllMarketItem
   yesLabel: string
   noLabel: string
+  marketTickerLabel: string
+  liveLabel: string
+  spreadAndTotalLabel: string
+  marketCountLabel: string
 }) {
   const outcomeRows = [
     {
@@ -226,7 +245,7 @@ function MarketCard({
           </div>
 
           <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#5f5f68]">
-            MKT
+            {marketTickerLabel}
           </span>
         </div>
 
@@ -236,7 +255,7 @@ function MarketCard({
 
         <div className="mt-2 flex items-center gap-2 text-[12px] text-[#8a8a8a]">
           <span className="size-2 rounded-full bg-[#ef476f]" />
-          <span className="font-semibold text-[#ef476f]">LIVE</span>
+          <span className="font-semibold text-[#ef476f]">{liveLabel}</span>
           <span>·</span>
           <span>{item.trendValue}</span>
         </div>
@@ -276,8 +295,8 @@ function MarketCard({
         <div className="mt-7 flex items-center justify-between gap-4 text-[12px] text-[#8a8a8a]">
           <span>{item.volume}</span>
           <div className="flex items-center gap-4">
-            <span>Spread and Total</span>
-            <span>2 markets</span>
+            <span>{spreadAndTotalLabel}</span>
+            <span>{marketCountLabel}</span>
           </div>
         </div>
       </div>
