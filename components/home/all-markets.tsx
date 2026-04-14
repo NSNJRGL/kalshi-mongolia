@@ -195,14 +195,12 @@ function MarketCard({
       label: yesLabel,
       value: item.yes,
       accent: "bg-[#ef4444]",
-      chip: item.yes > item.no ? "1" : "2",
       icon: item.icon,
     },
     {
       label: noLabel,
       value: item.no,
       accent: "bg-[#3b82f6]",
-      chip: item.no > item.yes ? "1" : "2",
       icon: item.icon,
     },
   ]
@@ -264,11 +262,8 @@ function MarketCard({
                     <div className={cn("mt-2 h-[2px] w-28 rounded-full", outcome.accent)} />
                   </div>
 
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-9 min-w-11 items-center justify-center rounded-[8px] border border-white/12 bg-[#171717] px-3 text-[13px] font-semibold text-[#d5d5d5]">
-                      {outcome.chip}
-                    </div>
-                    <div className="flex h-11 min-w-[102px] items-center justify-center rounded-full border border-[#2cbf8c] px-5 text-[14px] font-bold text-[#ececec]">
+                  <div className="flex shrink-0 items-center">
+                    <div className="flex h-11 min-w-[108px] items-center justify-center rounded-full border border-[#2cbf8c] px-5 text-[14px] font-bold tabular-nums text-[#ececec]">
                       {outcome.value}%
                     </div>
                   </div>

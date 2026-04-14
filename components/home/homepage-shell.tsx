@@ -14,7 +14,7 @@ export function HomepageShell() {
   return (
     <>
       <main className="pb-24 pt-6">
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,994px)_485px]">
+        <div className="grid gap-5 xl:grid-cols-[minmax(0,1.7fr)_minmax(320px,0.78fr)]">
           <FeaturedHero
             title={content.labels.featuredTitle}
             description={content.labels.featuredDescription}

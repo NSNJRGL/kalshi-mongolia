@@ -1,8 +1,6 @@
 import { ArrowDown01Icon, ArrowRight01Icon, FireIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 
-import { Card } from "@/components/ui/card"
-
 import type { SideRailProps } from "./homepage-types"
 
 function TrendLabel({
@@ -35,8 +33,8 @@ export function SideRail({
   hotTopicsTitle,
 }: SideRailProps) {
   return (
-    <aside className="space-y-6">
-      <Card className="rounded-2xl border-white/10 bg-[#111111] px-[17px] py-[17px] shadow-none">
+    <aside className="space-y-4">
+      <div className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-4">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold tracking-[-0.01em] text-[#e5e5e5]">
             {urgentTitle}
@@ -44,16 +42,16 @@ export function SideRail({
           <HugeiconsIcon icon={ArrowRight01Icon} size={12} className="text-[#888]" />
         </div>
 
-        <div className="mt-9 space-y-3">
+        <div className="mt-5 space-y-2.5">
           {urgentItems.map((item, index) => (
-            <div key={item.id} className="flex gap-2">
+            <div key={item.id} className="flex gap-2.5">
               <span className="w-4 pt-0.5 text-xs font-medium text-[#888]">
                 {index + 1}
               </span>
-              <div className="min-w-0">
-                <p className="text-xs leading-[15px] text-[#e5e5e5]">{item.question}</p>
-                <div className="mt-1 flex items-center gap-2">
-                  <span className="text-base font-bold leading-6 text-[#e5e5e5]">
+              <div className="min-w-0 space-y-1">
+                <p className="text-[13px] leading-[18px] text-[#e5e5e5]">{item.question}</p>
+                <div className="flex items-center gap-2">
+                  <span className="text-[15px] font-bold leading-5 text-[#e5e5e5]">
                     {item.probability}%
                   </span>
                   <TrendLabel value={item.trendValue} direction={item.trendDirection} />
@@ -62,9 +60,9 @@ export function SideRail({
             </div>
           ))}
         </div>
-      </Card>
+      </div>
 
-      <Card className="rounded-2xl border-white/10 bg-[#111111] px-[17px] py-[17px] shadow-none">
+      <div className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-4">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold tracking-[-0.01em] text-[#e5e5e5]">
             {hotTopicsTitle}
@@ -72,29 +70,31 @@ export function SideRail({
           <HugeiconsIcon icon={ArrowRight01Icon} size={12} className="text-[#888]" />
         </div>
 
-        <div className="mt-9 space-y-2">
+        <div className="mt-5 space-y-1.5">
           {topics.map((topic, index) => (
             <div
               key={topic.id}
-              className="flex items-center gap-2 rounded-xl px-1.5 py-1"
+              className="flex items-center gap-2.5 rounded-xl px-0.5 py-1"
             >
               <span className="w-4 text-xs font-medium text-[#888]">{index + 1}</span>
-              <div className="flex size-7 items-center justify-center rounded bg-[#1f1f1f] text-sm text-[#e5e5e5]">
+              <div className="flex size-7 items-center justify-center rounded-lg bg-[#1f1f1f] text-sm text-[#e5e5e5]">
                 {topic.icon}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-medium leading-4 text-[#e5e5e5]">
+                <p className="text-[13px] font-medium leading-4 text-[#e5e5e5]">
                   {topic.label}
                 </p>
-                <p className="text-[10px] leading-[15px] text-[#888]">{topic.volume}</p>
+                <p className="mt-0.5 text-[11px] leading-[15px] text-[#888]">{topic.volume}</p>
               </div>
-              <span className={topic.trendDirection === "up" ? "text-[#10b981]" : "text-[#ef4444]"}>
+              <span
+                className={topic.trendDirection === "up" ? "text-[#10b981]" : "text-[#ef4444]"}
+              >
                 {topic.trendDirection === "up" ? "🔥" : "↓"}
               </span>
             </div>
           ))}
         </div>
-      </Card>
+      </div>
     </aside>
   )
 }
