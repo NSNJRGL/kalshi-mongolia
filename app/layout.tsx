@@ -1,6 +1,7 @@
 import { IBM_Plex_Mono, Noto_Sans } from "next/font/google"
 
 import "./globals.css"
+import { LanguageProvider } from "@/components/providers/language-provider"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils";
@@ -30,9 +31,11 @@ export default function RootLayout({
       className={cn("antialiased", fontMono.variable, "font-sans", notoSans.variable)}
     >
       <body className="min-h-screen bg-[#0b0b0c] text-white">
-        <ThemeProvider>
-          <TooltipProvider>{children}</TooltipProvider>
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <TooltipProvider>{children}</TooltipProvider>
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   )

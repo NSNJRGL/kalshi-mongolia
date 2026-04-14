@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 
 import {
@@ -10,13 +12,14 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import {
-  categoryNavigation,
-  primaryNavigation,
-} from "@/lib/mock-market-data"
+import { useLanguage } from "@/components/providers/language-provider"
+import { getHomepageContent } from "@/lib/mock-market-data"
 import { cn } from "@/lib/utils"
 
 export function Header() {
+  const { language } = useLanguage()
+  const content = getHomepageContent(language)
+
   return (
     <header className="border-b border-white/10 bg-[rgba(10,10,10,0.8)] backdrop-blur-sm">
       <div className="flex h-14 items-center justify-between">
@@ -26,12 +29,12 @@ export function Header() {
               М
             </div>
             <span className="text-[18px] font-bold tracking-[-0.03em] text-[#e5e5e5]">
-              МаркетХөл
+              {content.brandName}
             </span>
           </Link>
 
           <nav className="hidden items-center gap-4 lg:flex">
-            {primaryNavigation.map((item, index) => (
+            {content.primaryNavigation.map((item, index) => (
               <Link
                 key={item.label}
                 href={item.href}
@@ -60,14 +63,14 @@ export function Header() {
             />
             <Input
               type="search"
-              placeholder="Хайлт хийх..."
+              placeholder={content.labels.headerSearchPlaceholder}
               className="h-9 w-64 rounded-[10px] border-white/10 bg-[#1f1f1f]/50 pl-9 pr-3 text-sm text-[#e5e5e5] placeholder:text-[#888] shadow-none focus-visible:border-[#10b981]/60 focus-visible:ring-0"
               aria-label="Search markets"
             />
           </label>
 
           <Button className="h-8 rounded-[10px] bg-[#10b981] px-3 text-sm font-medium text-black hover:bg-[#34d399]">
-            Мөнгө оруулах
+            {content.labels.depositCta}
           </Button>
 
           <Button
@@ -91,13 +94,13 @@ export function Header() {
       </div>
 
       <div className="flex h-[33px] items-center gap-4 overflow-x-auto border-t border-white/10 text-xs">
-        {categoryNavigation.map((item) => (
+        {content.categoryNavigation.map((item) => (
           <Link
             key={item}
             href="#"
             className={cn(
               "shrink-0 font-medium text-[#888] transition-colors hover:text-[#e5e5e5]",
-              item === "Спорт" && "text-[#10b981]"
+              item === content.activeCategoryNavigation && "text-[#10b981]"
             )}
           >
             {item}

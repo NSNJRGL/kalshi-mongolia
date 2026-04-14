@@ -28,13 +28,18 @@ function TrendLabel({
   )
 }
 
-export function SideRail({ urgentItems, topics }: SideRailProps) {
+export function SideRail({
+  urgentItems,
+  topics,
+  urgentTitle,
+  hotTopicsTitle,
+}: SideRailProps) {
   return (
     <aside className="space-y-6">
       <Card className="rounded-2xl border-white/10 bg-[#111111] px-[17px] py-[17px] shadow-none">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold tracking-[-0.01em] text-[#e5e5e5]">
-            Яаралтай мэдээ
+            {urgentTitle}
           </h3>
           <HugeiconsIcon icon={ArrowRight01Icon} size={12} className="text-[#888]" />
         </div>
@@ -62,7 +67,7 @@ export function SideRail({ urgentItems, topics }: SideRailProps) {
       <Card className="rounded-2xl border-white/10 bg-[#111111] px-[17px] py-[17px] shadow-none">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold tracking-[-0.01em] text-[#e5e5e5]">
-            Халуун сэдвүүд
+            {hotTopicsTitle}
           </h3>
           <HugeiconsIcon icon={ArrowRight01Icon} size={12} className="text-[#888]" />
         </div>

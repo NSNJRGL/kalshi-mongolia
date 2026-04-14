@@ -54,18 +54,22 @@ function MarketIcon({
   )
 }
 
-export function FeaturedHero({ items }: FeaturedHeroProps) {
+export function FeaturedHero({
+  items,
+  title,
+  description,
+  probabilityLabel,
+  volumeLabel,
+}: FeaturedHeroProps) {
   const [lead, ...secondary] = items
 
   return (
     <section className="w-full">
       <div className="mb-4">
         <h2 className="text-[20px] font-bold tracking-[-0.03em] text-[#e5e5e5]">
-          Top 5 үйл явдал
+          {title}
         </h2>
-        <p className="mt-0.5 text-sm text-[#888]">
-          Монгол дахь хамгийн идэвхтэй зах зээлүүд
-        </p>
+        <p className="mt-0.5 text-sm text-[#888]">{description}</p>
       </div>
 
       <div className="grid gap-3">
@@ -89,11 +93,11 @@ export function FeaturedHero({ items }: FeaturedHeroProps) {
                   <span className="text-[30px] leading-9 font-bold tracking-[0.01em] text-[#e5e5e5]">
                     {lead.probability}%
                   </span>
-                  <span className="pb-1 text-xs text-[#888]">магадлал</span>
+                  <span className="pb-1 text-xs text-[#888]">{probabilityLabel}</span>
                 </div>
 
                 <div className="text-right">
-                  <p className="text-xs text-[#888]">Эргэлт</p>
+                  <p className="text-xs text-[#888]">{volumeLabel}</p>
                   <p className="text-sm font-semibold text-[#e5e5e5]">{lead.volume}</p>
                 </div>
               </div>
@@ -132,7 +136,7 @@ export function FeaturedHero({ items }: FeaturedHeroProps) {
                     {item.probability}%
                   </span>
                   <div className="text-right">
-                    <p className="text-[9px] leading-[13.5px] text-[#888]">Эргэлт</p>
+                    <p className="text-[9px] leading-[13.5px] text-[#888]">{volumeLabel}</p>
                     <p className="text-[10px] leading-[15px] font-semibold text-[#e5e5e5]">
                       {item.volume}
                     </p>
