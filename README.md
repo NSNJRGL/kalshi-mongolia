@@ -1,41 +1,95 @@
-# Kalshi-Inspired Interview Project
+# Ulaan Market
 
-This repo is a Next.js interview project for building a prediction-market-style product inspired by the interaction quality of [Kalshi](https://kalshi.com/), without copying its branding or content.
+Ulaan Market is a Kalshi- and Polymarket-inspired frontend interview project built with Next.js. The app focuses on a dark, data-dense prediction-market UI with local mock data, bilingual content, and reusable React components.
 
-The working spec and build order live in [docs/project-spec.md](/Users/nasanjargal/Desktop/kalshi-mongolia/docs/project-spec.md).
+This repo is intentionally frontend-only:
+- no backend
+- no auth
+- no live API
+- no trading logic
 
-## Current Stack
+The goal is to practice React composition, Next.js App Router patterns, typed mock data, Tailwind styling, and interview-ready frontend architecture.
+
+## Stack
 
 - Next.js 16 App Router
 - React 19
 - TypeScript
 - Tailwind CSS v4
 - shadcn/ui primitives
+- `next/font/google` with `Manrope` and `IBM Plex Mono`
 
-## Commands
+## Current Features
+
+- dashboard-style homepage
+- bilingual English / Mongolian UI
+- local language persistence with `localStorage`
+- featured market hero section
+- right-side news and hot-topics rail
+- searchable and filterable all-markets grid
+- mock market cards with sportsbook-inspired layout
+- responsive dark theme layout
+
+## Project Structure
+
+```text
+app/
+  layout.tsx                App providers, fonts, and global shell
+  page.tsx                  Homepage entry
+  globals.css               Design tokens and global styling
+
+components/
+  containers/
+    header/                 Top navigation and category row
+    layout/                 Shared main content container
+  home/                     Homepage sections
+  providers/                Language provider
+  ui/                       shadcn/ui components
+
+lib/
+  mock-market-data.ts       Typed bilingual mock data
+  utils.ts                  Shared utilities
+```
+
+## Getting Started
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the dev server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Useful Commands
 
 ```bash
 npm run dev
 npm run lint
 npm run typecheck
 npm run build
+npm run format
 ```
 
-## Recommended Build Order
+## Notes
 
-1. Rework design tokens and layout shell.
-2. Replace the starter page with a real landing page.
-3. Add typed mock market data.
-4. Build the markets list page.
-5. Build the market detail page.
-6. Add polish, tests, and deployment.
+- English is the default language.
+- Mongolian content is stored locally in `lib/mock-market-data.ts`.
+- The design direction is inspired by prediction-market products, but the branding and content are original to this project.
 
-## Goal
+## Next Steps
 
-Use this project to practice:
+- build `/markets` and `/markets/[slug]`
+- add detail-page composition from the existing mock data
+- refine loading, empty, and mobile states
+- add tests around filtering and language behavior
 
-- React component composition
-- Next.js App Router patterns
-- responsive frontend architecture
-- accessible interaction design
-- interview-ready code explanations
+## Reference
+
+The initial planning document is in `docs/project-spec.md`.
