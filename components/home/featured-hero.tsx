@@ -66,39 +66,39 @@ export function FeaturedHero({
   return (
     <section className="w-full">
       <div className="mb-4">
-        <h2 className="text-[20px] font-bold tracking-[-0.03em] text-[#e5e5e5]">
+        <h2 className="text-[22px] font-extrabold tracking-[-0.035em] text-[#ececec]">
           {title}
         </h2>
-        <p className="mt-0.5 text-sm text-[#888]">{description}</p>
+        <p className="mt-1 text-[14px] text-[#8a8a8a]">{description}</p>
       </div>
 
       <div className="grid gap-3">
-        <Card className="rounded-2xl border-white/10 bg-[#111111] px-[17px] py-[17px] shadow-none">
+        <Card className="rounded-[16px] border-white/10 bg-[#111111] px-4 py-4 shadow-none">
           <div className="flex items-start gap-4">
             <MarketIcon icon={lead.icon} className={lead.iconClassName} />
             <div className="flex min-w-0 flex-1 flex-col">
               <div className="flex items-center gap-2">
-                <Badge className="h-[21px] rounded-[10px] bg-[#1a1a1a] px-[9px] text-[10px] font-medium text-[#e5e5e5] hover:bg-[#1a1a1a]">
+                <Badge className="h-5 rounded-full bg-[#1a1a1a] px-2.5 text-[10px] font-medium text-[#ececec] hover:bg-[#1a1a1a]">
                   {lead.category}
                 </Badge>
                 <TrendPill direction={lead.trendDirection} value={lead.trendValue} />
               </div>
 
-              <h3 className="mt-[7px] text-base font-bold tracking-[-0.02em] text-[#e5e5e5]">
+              <h3 className="mt-2 text-[16px] font-extrabold tracking-[-0.025em] text-[#ececec]">
                 {lead.question}
               </h3>
 
               <div className="mt-3 flex items-end justify-between">
                 <div className="flex items-end gap-2">
-                  <span className="text-[30px] leading-9 font-bold tracking-[0.01em] text-[#e5e5e5]">
+                  <span className="text-[30px] leading-9 font-bold tracking-[0.01em] text-[#ececec]">
                     {lead.probability}%
                   </span>
-                  <span className="pb-1 text-xs text-[#888]">{probabilityLabel}</span>
+                  <span className="pb-1 text-[11px] text-[#8a8a8a]">{probabilityLabel}</span>
                 </div>
 
                 <div className="text-right">
-                  <p className="text-xs text-[#888]">{volumeLabel}</p>
-                  <p className="text-sm font-semibold text-[#e5e5e5]">{lead.volume}</p>
+                  <p className="text-[11px] text-[#8a8a8a]">{volumeLabel}</p>
+                  <p className="text-[14px] font-semibold text-[#ececec]">{lead.volume}</p>
                 </div>
               </div>
             </div>
@@ -109,14 +109,14 @@ export function FeaturedHero({
           {secondary.map((item) => (
             <Card
               key={item.id}
-              className="rounded-2xl border-white/10 bg-[#111111] px-[13px] py-[13px] shadow-none"
+              className="rounded-[16px] border-white/10 bg-[#111111] px-[13px] py-[13px] shadow-none"
             >
-              <div className="flex h-full flex-col gap-9">
+              <div className="flex h-full flex-col gap-8">
                 <div className="flex items-start gap-3">
                   <MarketIcon icon={item.icon} className={item.iconClassName} size="sm" />
 
                   <div className="flex min-w-0 flex-1 flex-col">
-                    <Badge className="mb-1 h-[19.5px] w-fit rounded-[10px] bg-[#1a1a1a] px-[7px] text-[9px] font-medium text-[#e5e5e5] hover:bg-[#1a1a1a]">
+                    <Badge className="mb-1 h-5 w-fit rounded-full bg-[#1a1a1a] px-2 text-[9px] font-medium text-[#ececec] hover:bg-[#1a1a1a]">
                       {item.category}
                     </Badge>
                     <TrendPill
@@ -127,17 +127,17 @@ export function FeaturedHero({
                   </div>
                 </div>
 
-                <p className="text-xs font-medium leading-[15px] text-[#e5e5e5]">
+                <p className="text-[12px] font-medium leading-[15px] text-[#ececec]">
                   {item.question}
                 </p>
 
                 <div className="mt-auto flex items-end justify-between">
-                  <span className="text-[20px] leading-7 font-bold tracking-[-0.03em] text-[#e5e5e5]">
+                  <span className="text-[20px] leading-7 font-bold tracking-[-0.03em] text-[#ececec]">
                     {item.probability}%
                   </span>
                   <div className="text-right">
-                    <p className="text-[9px] leading-[13.5px] text-[#888]">{volumeLabel}</p>
-                    <p className="text-[10px] leading-[15px] font-semibold text-[#e5e5e5]">
+                    <p className="text-[9px] leading-[13.5px] text-[#8a8a8a]">{volumeLabel}</p>
+                    <p className="text-[10px] leading-[15px] font-semibold text-[#ececec]">
                       {item.volume}
                     </p>
                   </div>

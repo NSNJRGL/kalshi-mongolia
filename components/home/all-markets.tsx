@@ -17,37 +17,6 @@ import type { MarketGridProps } from "./homepage-types"
 const INITIAL_MARKET_COUNT = 8
 const LOAD_MORE_COUNT = 4
 
-function OutcomeBlock({
-  label,
-  value,
-  tone,
-}: {
-  label: string
-  value: number
-  tone: "yes" | "no"
-}) {
-  return (
-    <div
-      className={cn(
-        "flex-1 rounded-xl border px-[7px] py-[7px]",
-        tone === "yes"
-          ? "border-[#1e3b2f] bg-[#12281f]"
-          : "border-[#4a2525] bg-[#2a1717]"
-      )}
-    >
-      <p className="text-[9px] leading-[13.5px] text-[#888]">{label}</p>
-      <p
-        className={cn(
-          "text-base leading-4 font-semibold",
-          tone === "yes" ? "text-[#48bb78]" : "text-[#ef4444]"
-        )}
-      >
-        {value}%
-      </p>
-    </div>
-  )
-}
-
 export function AllMarkets({
   items,
   title,
@@ -105,11 +74,11 @@ export function AllMarkets({
 
   return (
     <section id="markets" className="pt-14">
-      <h2 className="text-[20px] font-bold tracking-[-0.03em] text-[#e5e5e5]">
+      <h2 className="text-[22px] font-extrabold tracking-[-0.035em] text-[#ececec]">
         {title}
       </h2>
 
-      <div className="mt-8 flex flex-col gap-6">
+      <div className="mt-8 flex flex-col gap-5">
         <div className="flex flex-col gap-3 lg:w-fit">
           <div className="flex gap-3">
             <div className="relative min-w-0 flex-1 lg:w-[391px]">
@@ -122,13 +91,13 @@ export function AllMarkets({
                 value={searchQuery}
                 onChange={(event) => handleSearchChange(event.target.value)}
                 placeholder={searchPlaceholder}
-                className="h-10 rounded-xl border-white/10 bg-[#111111] pl-10 pr-3 text-[13px] text-[#e5e5e5] placeholder:text-[#666] focus-visible:border-[#10b981]/60 focus-visible:ring-0"
+                className="h-10 rounded-[10px] border-white/10 bg-[#111111] pl-10 pr-3 text-[13px] text-[#ececec] placeholder:text-[#767676] focus-visible:border-[#10b981]/60 focus-visible:ring-0"
               />
             </div>
             <Button
               variant="outline"
               size="icon"
-              className="size-10 rounded-xl border-white/10 bg-[#111111] text-[#888] hover:bg-[#181818] hover:text-[#e5e5e5]"
+              className="size-10 rounded-[10px] border-white/10 bg-[#111111] text-[#8a8a8a] hover:bg-[#181818] hover:text-[#ececec]"
               onClick={resetFilters}
               aria-label="Reset market filters"
             >
@@ -145,10 +114,10 @@ export function AllMarkets({
               >
                 <Badge
                   className={cn(
-                    "h-8 rounded-xl px-3 text-sm font-semibold",
+                    "h-8 rounded-[10px] px-3 text-[13px] font-semibold",
                     selectedFilter === filter
                       ? "bg-[#10b981] text-[#0a0a0a] hover:bg-[#10b981]"
-                      : "bg-[#1f1f1f] text-[#e5e5e5] hover:bg-[#1f1f1f]"
+                      : "bg-[#171717] text-[#ececec] hover:bg-[#171717]"
                   )}
                 >
                   {filter}
@@ -160,7 +129,7 @@ export function AllMarkets({
 
         {filteredItems.length > 0 ? (
           <>
-            <p className="text-xs text-[#666]">
+            <p className="text-[12px] text-[#767676]">
               {filteredItems.length} {matchingMarketsLabel}
               {selectedFilter !== allFilterLabel ? ` • ${selectedFilter}` : ""}
             </p>
@@ -177,16 +146,16 @@ export function AllMarkets({
             </div>
           </>
         ) : (
-          <Card className="rounded-2xl border-white/10 bg-[#111111] px-6 py-10 text-center shadow-none">
-            <h3 className="text-base font-semibold text-[#e5e5e5]">
+          <Card className="rounded-[16px] border-white/10 bg-[#111111] px-6 py-10 text-center shadow-none">
+            <h3 className="text-base font-semibold text-[#ececec]">
               {noMarketsTitle}
             </h3>
-            <p className="mt-2 text-sm text-[#888]">{noMarketsDescription}</p>
+            <p className="mt-2 text-sm text-[#8a8a8a]">{noMarketsDescription}</p>
             <div className="mt-5 flex justify-center">
               <Button
                 variant="outline"
                 onClick={resetFilters}
-                className="h-9 rounded-xl border-white/10 bg-transparent px-4 text-sm text-[#e5e5e5] hover:bg-[#111111]"
+                className="h-9 rounded-[10px] border-white/10 bg-transparent px-4 text-sm text-[#ececec] hover:bg-[#111111]"
               >
                 {clearFiltersLabel}
               </Button>
@@ -201,7 +170,7 @@ export function AllMarkets({
               onClick={() =>
                 setVisibleCount((currentCount) => currentCount + LOAD_MORE_COUNT)
               }
-              className="h-10 rounded-xl border-white/10 bg-transparent px-6 text-sm font-semibold text-[#e5e5e5] hover:bg-[#111111]"
+              className="h-10 rounded-[10px] border-white/10 bg-transparent px-6 text-[13px] font-semibold text-[#ececec] hover:bg-[#111111]"
             >
               {loadMoreLabel}
             </Button>
@@ -221,33 +190,101 @@ function MarketCard({
   yesLabel: string
   noLabel: string
 }) {
+  const outcomeRows = [
+    {
+      label: yesLabel,
+      value: item.yes,
+      accent: "bg-[#ef4444]",
+      chip: item.yes > item.no ? "1" : "2",
+      icon: item.icon,
+    },
+    {
+      label: noLabel,
+      value: item.no,
+      accent: "bg-[#3b82f6]",
+      chip: item.no > item.yes ? "1" : "2",
+      icon: item.icon,
+    },
+  ]
+
   return (
-    <Card className="rounded-2xl border-white/10 bg-[#111111] px-[13px] py-[13px] shadow-none">
+    <Card className="rounded-[20px] border-white/10 bg-[#111111] px-[18px] py-[18px] shadow-none">
       <div className="flex h-full flex-col">
-        <div className="flex items-start justify-between">
-          <div
-            className={cn(
-              "flex size-8 items-center justify-center rounded-lg bg-gradient-to-br text-sm text-[#e5e5e5]",
-              item.iconClassName
-            )}
-          >
-            {item.icon}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div
+              className={cn(
+                "flex size-9 items-center justify-center rounded-full bg-gradient-to-br text-base text-[#f5f5f5]",
+                item.iconClassName
+              )}
+            >
+              {item.icon}
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#9b9b9b]">
+                {item.category}
+              </span>
+            </div>
           </div>
-          <Badge className="h-[19.5px] rounded-[10px] bg-[#1a1a1a] px-[7px] text-[9px] font-medium text-[#e5e5e5] hover:bg-[#1a1a1a]">
-            {item.category}
-          </Badge>
+
+          <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#5f5f68]">
+            MKT
+          </span>
         </div>
 
-        <p className="mt-8 min-h-[60px] text-xs font-medium leading-[15px] text-[#e5e5e5]">
+        <p className="mt-5 min-h-[58px] text-[17px] leading-[1.25] font-extrabold tracking-[-0.03em] text-[#ececec]">
           {item.question}
         </p>
 
-        <div className="mt-9 flex gap-1.5">
-          <OutcomeBlock label={yesLabel} value={item.yes} tone="yes" />
-          <OutcomeBlock label={noLabel} value={item.no} tone="no" />
+        <div className="mt-2 flex items-center gap-2 text-[12px] text-[#8a8a8a]">
+          <span className="size-2 rounded-full bg-[#ef476f]" />
+          <span className="font-semibold text-[#ef476f]">LIVE</span>
+          <span>·</span>
+          <span>{item.trendValue}</span>
         </div>
 
-        <p className="mt-4 text-[10px] leading-[15px] text-[#666]">{item.volume}</p>
+        <div className="mt-7 space-y-4">
+          {outcomeRows.map((outcome) => (
+            <div key={outcome.label} className="flex items-center gap-3">
+              <div
+                className={cn(
+                  "flex size-9 items-center justify-center rounded-full bg-gradient-to-br text-sm text-[#f5f5f5]",
+                  item.iconClassName
+                )}
+              >
+                {outcome.icon}
+              </div>
+
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="truncate text-[13px] font-medium text-[#e5e5e5]">
+                      {outcome.label}
+                    </p>
+                    <div className={cn("mt-2 h-[2px] w-28 rounded-full", outcome.accent)} />
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 min-w-11 items-center justify-center rounded-[8px] border border-white/12 bg-[#171717] px-3 text-[13px] font-semibold text-[#d5d5d5]">
+                      {outcome.chip}
+                    </div>
+                    <div className="flex h-11 min-w-[102px] items-center justify-center rounded-full border border-[#2cbf8c] px-5 text-[14px] font-bold text-[#ececec]">
+                      {outcome.value}%
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-7 flex items-center justify-between gap-4 text-[12px] text-[#8a8a8a]">
+          <span>{item.volume}</span>
+          <div className="flex items-center gap-4">
+            <span>Spread and Total</span>
+            <span>2 markets</span>
+          </div>
+        </div>
       </div>
     </Card>
   )
